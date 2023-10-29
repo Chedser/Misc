@@ -1,0 +1,35 @@
+#include <iostream>
+using namespace std;
+
+template<typename T>
+class SmartPointer {
+public:
+    SmartPointer(T* ptr){
+        this->ptr = ptr;
+        cout << "Вызов конструктора" << endl;
+    }
+    ~SmartPointer(){
+        if (ptr != nullptr) {
+            delete ptr;
+            ptr = nullptr;
+            cout << "Вызов деструктора" << endl;
+        }
+    }
+    T& operator*() {
+        return *ptr;
+    }
+
+private:
+    T* ptr;
+};
+
+int main() {
+     setlocale(0,"");
+
+     SmartPointer<int> sp = new int(5);
+     *sp = 7;
+     cout << *sp << endl;
+     cin.get();
+ 
+    return 0;
+}
